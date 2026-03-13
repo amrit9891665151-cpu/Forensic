@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writeverify - Forensic Handwriting Analysis</title>
+    <!-- Modern Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="background-effects">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+        <div class="grid-overlay"></div>
+    </div>
+
+    <main class="container">
+        <header>
+            <h1><i class="fa-solid fa-fingerprint"></i> Writeverify</h1>
+            <p>Automated Forensic Document Examination</p>
+        </header>
+
+        <section class="split-upload-section">
+            <div class="upload-column">
+                <h2><i class="fa-solid fa-file-contract"></i> Known Exemplar</h2>
+                <div id="drop-zone-known" class="drop-zone">
+                    <i class="fa-solid fa-file-signature drop-icon"></i>
+                    <h3>Upload Reference</h3>
+                    <p>Drag & drop or click</p>
+                    <input type="file" id="file-input-known" accept="image/*" hidden>
+                </div>
+                <div id="preview-known" class="preview-single hidden"></div>
+            </div>
+
+            <div class="upload-column">
+                <h2><i class="fa-solid fa-clipboard-question"></i> Questioned Document</h2>
+                <div id="drop-zone-unknown" class="drop-zone border-accent">
+                    <i class="fa-solid fa-magnifying-glass-chart drop-icon"></i>
+                    <h3>Upload Sample to Test</h3>
+                    <p>Drag & drop or click</p>
+                    <input type="file" id="file-input-unknown" accept="image/*" hidden>
+                </div>
+                <div id="preview-unknown" class="preview-single hidden"></div>
+            </div>
+        </section>
+
+        <section id="action-section" class="action-section">
+            <button id="analyze-btn" class="primary-btn" disabled>
+                <i class="fa-solid fa-microchip"></i> Execute Forensic Analysis
+            </button>
+        </section>
+
+        <section id="results-section" class="results-section hidden">
+            <h2><i class="fa-solid fa-microscope"></i> Analysis Board</h2>
+            <div id="loader" class="loader hidden">
+                <div class="spinner"></div>
+                <p>Extracting forensic biometric features...</p>
+            </div>
+            <div id="result-content" class="result-content">
+                <!-- Results dynamically injected here -->
+            </div>
+            <div id="action-buttons" class="action-buttons hidden" style="margin-top: 2rem;">
+                <button id="download-pdf-btn" class="secondary-btn">
+                    <i class="fa-solid fa-file-pdf"></i> Export Forensic Dossier
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Hidden Canvas Elements for Processing -->
+    <div id="processing-canvas-container" style="display: none;"></div>
+
+    <!-- Load Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script async src="https://docs.opencv.org/4.8.0/opencv.js" onload="onOpenCvReady();"
+        type="text/javascript"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
